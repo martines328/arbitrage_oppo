@@ -42,8 +42,45 @@ def binance():
     for n in data:
         if "USDT" in n['symbol']:
             list.append(n['symbol'])
-    with open("binance.txt", 'a+') as f:
+    with open("coins/binance.txt", 'a+') as f:
         f.write(str(list))
+
+
+def kucoin():
+    base_url = 'https://api.kucoin.com'
+    prefix = '/api/v1/'
+    url = "/api/v1/symbols"
+
+    r = requests.request('GET', base_url + url)
+    r = r.json()
+    print(r)
+    list = []
+    for n in r['data']:
+        print(n['symbol'])
+        if "-USDT" in n['symbol']:
+            list.append(n['symbol'])
+    with open('coins/kucoin.txt', 'a+') as f:
+        f.write(str(list))
+
+    return list
+
+
+def mexc():
+    base_url = 'https://www.mexc.com'
+
+    prefix = " ?instId=BTC-USDT"
+    url = "/open/api/v2/market/coin/list"
+
+    r = requests.request('GET', base_url + url)
+    r = r.json()
+    list = []
+    for n in r['data']:
+        pair = n['currency'] + "_USDT"
+        list.append(pair)
+    with open('coins/mexc.txt', 'a+') as f:
+        f.write(str(list))
+
+
 
 
 def find_gateio():
@@ -62,33 +99,10 @@ def find_gateio():
         # print(n['currency_pair'])
         if "_USDT" in n['currency_pair']:
             list.append(n['currency_pair'])
-    with open('gateio.txt', 'a+') as f:
+    with open('coins/gateio.txt', 'a+') as f:
         f.write(str(list))
 
     return list
-
-
-def check_similar():
-    # pancv1, pancv2 = find_pancakae()
-
-    # gateio = find_gateio()
-
-    with open("binance.txt") as f:
-        list = f.read()
-    binance_list = ast.literal_eval(list)
-
-    with open("gateio.txt") as f:
-        list = f.read()
-    gate_list = ast.literal_eval(list)
-
-    result_list = []
-
-    for n in binance_list:
-        n_gate = n.replace("USDT", "_USDT")
-        if n_gate in gate_list:
-            result_list.append(n)
-    with open("similar.txt", 'a+') as f:
-        f.write(str(result_list))
 
 
 def pancake_price_v1(contract):
