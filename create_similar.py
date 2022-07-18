@@ -39,7 +39,7 @@ def gate_kucoin_similar():
         f.write(str(result_list))
 
 
-def check_similar():
+def binance_gate_similar():
     # pancv1, pancv2 = find_pancakae()
 
     # gateio = find_gateio()
@@ -58,7 +58,26 @@ def check_similar():
         n_gate = n.replace("USDT", "_USDT")
         if n_gate in gate_list:
             result_list.append(n)
-    with open("coins/similar.txt", 'a+') as f:
+    with open("similar_list/binance_gate_similar.txt", 'a+') as f:
+        f.write(str(result_list))
+
+
+
+def gate_mexc_similar():
+    with open("coins/mexc.txt") as f:
+        list = f.read()
+    mexc_list = ast.literal_eval(list)
+
+    with open("coins/gateio.txt") as f:
+        list = f.read()
+    gate_list = ast.literal_eval(list)
+
+    result_list = []
+
+    for n in mexc_list:
+        if n in gate_list:
+            result_list.append(n)
+    with open("similar_list/gate_mexc_similar.txt", 'a+') as f:
         f.write(str(result_list))
 
 

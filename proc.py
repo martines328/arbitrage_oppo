@@ -83,7 +83,7 @@ def mexc():
 
 
 
-def find_gateio():
+def gate_io():
     host = "https://api.gateio.ws"
     prefix = "/api/v4"
     headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
