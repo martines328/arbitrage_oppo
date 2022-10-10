@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/pancake_gate_arbitrage.iml" filepath="$PROJECT_DIR$/.idea/pancake_gate_arbitrage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/arbitrage_oppo.iml" filepath="$PROJECT_DIR$/.idea/arbitrage_oppo.iml" />
     </modules>
   </component>
 </project>

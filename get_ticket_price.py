@@ -9,10 +9,17 @@ def get_kucoin_price(symbol):
     return float(data['data']['price'])
 
 
+def get_poloneix_price(symbol):
+    url =f'https://api.poloniex.com/markets/{symbol}/price'
+    data = requests.get(url)
+    data = data.json()
+    return float(data['price'])
+
 def get_binance_price(symbol):
     url = "https://api.binance.com/api/v3/ticker/price?symbol="
     data = requests.get(url + symbol)
     data = data.json()
+
     return float(data['price'])
 
 

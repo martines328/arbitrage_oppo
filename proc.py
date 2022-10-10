@@ -1,5 +1,3 @@
-import ast
-
 import requests
 
 
@@ -80,7 +78,11 @@ def mexc():
     with open('coins/mexc.txt', 'a+') as f:
         f.write(str(list))
 
-
+def ftx():
+    resp = requests.get('https://ftx.com/api/markets')
+    data =resp.json() 
+    for n in data['result']:
+        print(n)
 
 
 def gate_io():
@@ -89,8 +91,6 @@ def gate_io():
     headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
 
     url = '/spot/tickers'
-    # query_param = 'currency_pair=BTC_USDT'
-    # r = requests.request('GET', host + prefix + url  + "?" + query_param, headers=headers)
     r = requests.request('GET', host + prefix + url, headers=headers)
     r = r.json()
 
@@ -115,3 +115,18 @@ def pancake_price_v1(contract):
 
 def pancake_price_v2(contract):
     urlv2 = "https://api.pancakeswap.info/api/v2/tokens/"
+
+
+def poloneix():
+    url = 'https://api.poloniex.com/currencies'
+    result = requests.get(url)
+    result = result.json()
+    list = []
+
+    for n in result:
+        for i in n:
+            list.append(i+'_USDT')
+
+    with open('coins/poloneix.txt', 'a+') as f:
+        f.write(str(list))
+

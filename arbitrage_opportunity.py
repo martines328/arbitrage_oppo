@@ -4,6 +4,36 @@ import concurrent.futures
 from get_ticket_price import *
 
 
+def check_arbitrage_binance_poloniex():
+    print("||| BINANCE POLONIEX ARBITRAGE |||")
+
+    with open("similar_list/binance_poloneix_similar.txt") as f:
+        list = f.read()
+    biance_poloneix_similar_list = ast.literal_eval(list)
+    for n in biance_poloneix_similar_list:
+        try:
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future = executor.submit(get_binance_price, str(n))
+                binance_price = future.result()
+
+            poloneix_symbol = n.replace("USDT", "_USDT")
+
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future = executor.submit(get_poloneix_price, str(poloneix_symbol))
+                poloneix_price = future.result()
+
+            temp = poloneix_price / binance_price
+            temp *= 100
+            temp -= 100
+            if temp > 1 and temp < 30:
+                print("poloneix -> binance - " + n + "  ||  " + str(temp))
+            if temp < -1 and temp > -30:
+                # if temp > 1:
+                print("poloneix -> binance - " + n + "  ||  " + str(temp))
+        except Exception as e:
+            continue
+
+
 def check_arbitrage_biance_gate():
     print("||| BINANCE GATE ARBITRAGE |||")
     # list = ['MLNUSDT', 'GTCUSDT']
@@ -88,9 +118,9 @@ def check_arbitrage_kucoin_binance():
             temp = binance_price / kucoin_price
             temp *= 100
             temp -= 100
-            if temp > 0.5 and temp < 20:
+            if temp > 0.3 and temp < 20:
                 print("kucoin -> binance - " + n + "  ||  " + str(temp))
-            if temp < -0.5 and temp > -20:
+            if temp < -0.3 and temp > -20:
                 # if temp > 1:
                 print("binance -> kucoin - " + n + "  ||  " + str(temp))
         except Exception as e:

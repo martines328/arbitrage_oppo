@@ -1,7 +1,7 @@
 import create_similar
+import get_ticket_price
 import proc
 from arbitrage_opportunity import *
-
 
 
 def get_all_list():
@@ -9,6 +9,7 @@ def get_all_list():
     proc.gate_io()
     proc.mexc()
     proc.kucoin()
+
 
     create_similar.binance_gate_similar()
     create_similar.gate_mexc_similar()
@@ -25,6 +26,7 @@ def choose_arbitrage():
     print('4 -- Mexc Kucoin')
     print('5 -- Mexc Binance')
     print('6 -- Mexc Gate')
+    print('7 -- Binance Poloneix')
 
     choose = int(input("...  "))
     if choose == 1:
@@ -39,9 +41,12 @@ def choose_arbitrage():
         check_arbitrage_binance_mexc()
     if choose == 6:
         check_arbitrage_gate_mexc()
+    if choose ==7:
+        check_arbitrage_binance_poloniex()
 
 
 
 if __name__ == "__main__":
     choose_arbitrage()
     # get_all_list()
+

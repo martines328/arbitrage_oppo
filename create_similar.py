@@ -19,6 +19,28 @@ def binance_kucoin_similar():
     with open("similar_list/binance_kucoin_similar.txt", 'a+') as f:
         f.write(str(result_list))
 
+def binance_poloneix_similar():
+    with open("coins/poloneix.txt") as f:
+        list = f.read()
+    poloneix_list = ast.literal_eval(list)
+
+    with open("coins/binance.txt") as f:
+        list = f.read()
+    binance_list = ast.literal_eval(list)
+
+    result_list = []
+
+    for n in binance_list:
+        n_poloniex = n.replace("USDT", "_USDT")
+        if n_poloniex in poloneix_list:
+            result_list.append(n)
+
+    with open("similar_list/binance_poloneix_similar.txt", 'a+') as f:
+        f.write(str(result_list))
+
+
+
+
 
 def gate_kucoin_similar():
     with open("coins/kucoin.txt") as f:
